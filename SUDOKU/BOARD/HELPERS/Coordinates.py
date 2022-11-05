@@ -9,8 +9,12 @@ class Coordinates:
      - line
      - column
     of a Sudoku Cell
+    Both line and colum can have values from 1 to 9 (not 0 to 8)
     Can keep track of a LINE coordinate or a COLUMN coordinate
     Can give information about the BLOCK in which the Cell is contained
+    Coordinates has a line and column properties wich has a bytearray as a placeholder
+    Can be initialized with integers or a None
+    Can be populated after initialization with a None from integers
     """
     @singledispatchmethod
     def __init__(self):
@@ -126,3 +130,6 @@ class Coordinates:
         line_str = '_' if self.line is None else self.line
         column_str = '_' if self.column is None else self.column
         return f"({line_str}:{column_str})"
+
+    def __eq__(self, other):
+        return (self.line == other.line) and ((self.column == other.column))

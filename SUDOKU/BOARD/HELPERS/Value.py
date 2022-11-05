@@ -6,6 +6,9 @@ from SUDOKU.CONFIG.Constants import ALL_POSSIBILITIES_SET
 class Value:
     """
     This Class keeps track of the value of a Sudoku Cell
+    A Cell has a value property wich has a bytearray as a placeholder
+    It can be initialized with an integer or a character or a None
+    It can be populated after initialization with a None from an integer or a string
     """
     @singledispatchmethod
     def __init__(self):
@@ -55,6 +58,7 @@ class Value:
         except:
             pass
         else:
+            self._value.clear()
             self._value.extend(value.to_bytes(1, 'big', signed=False))
 
     def from_str(self, value: str):
@@ -66,6 +70,7 @@ class Value:
         except:
             pass
         else:
+            self._value.clear()
             self._value.extend(int(value) .to_bytes(1, 'big', signed=False))
 
     def clear(self):
@@ -100,3 +105,6 @@ class Value:
             return 0
         else:
             return self.value
+
+    def __eq__(self, other):
+        return self.value == other.value

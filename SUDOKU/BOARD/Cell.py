@@ -67,6 +67,13 @@ class Cell:
             self._value.from_int(value)
             self._markup.discard_all()
 
+    def promote_naked_single(self):
+        """
+        Number to fill in case of a Naked Single
+        """
+        self._value.from_int(list(self.markup.value)[0])
+        self._markup.discard_all()
+
     def fill_markup(self, markup):
         self._markup = markup
 
